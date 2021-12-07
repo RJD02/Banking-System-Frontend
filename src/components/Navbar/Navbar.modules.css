@@ -1,0 +1,10 @@
+.navbar {
+  text-align: center;
+  font-size: 20px;
+  color: red;
+}
+
+li a {
+  color: white;
+  text-decoration: none;
+}
