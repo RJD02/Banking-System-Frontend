@@ -33,14 +33,14 @@ function Customers() {
             console.log(individualData);
             return (
               <tr key={individualData.name}>
-                <th scope="row">
+                <td scope="row">
                   <Link to={`/transfer/${individualData.accId}`}>
                     {individualData.accId}
                   </Link>
-                </th>
-                <th scope="row">{individualData.name}</th>
-                <th scope="row">{individualData.email}</th>
-                <th scope="row">{individualData.currentBalance}</th>
+                </td>
+                <td scope="row">{individualData.name}</td>
+                <td scope="row">{individualData.email}</td>
+                <td scope="row">{individualData.currentBalance}</td>
               </tr>
             );
           })}

@@ -28,13 +28,13 @@ function TransactionHistory() {
         <tbody>
           {data.map((history) => (
             <tr key={history.sender}>
-              <th scope="row">{history.sender}</th>
-              <th scope="row">{history.receiver}</th>
-              <th scope="row">{history.amtTransfered}</th>
-              <th scope="row">
+              <td scope="row">{history.sender}</td>
+              <td scope="row">{history.receiver}</td>
+              <td scope="row">{history.amtTransfered}</td>
+              <td scope="row">
                 {moment(history.transferDate).fromNow()}
                 {/* ({moment(history.transferDate).format("YYYY-MM-DD")}) */}
-              </th>
+              </td>
             </tr>
           ))}
         </tbody>
