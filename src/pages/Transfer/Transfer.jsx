@@ -12,6 +12,7 @@ function Transfer() {
   const [allUsers, setAllUsers] = useState([]);
   const [name, setName] = useState("");
   const [amount, setAmount] = useState(0);
+  const [submitClicked, setSubmitClicked] = useState(false);
   const { id } = useParams();
   console.log(id);
   useEffect(() => {
@@ -27,6 +28,7 @@ function Transfer() {
       setAllUsers(data.map((details) => details.name));
     };
     getAllUserDetails();
+    setSubmitClicked(false);
   }, [id]);
   const userSelectHandler = (e) => {
     console.log(e.target.innerHTML);
@@ -35,43 +37,55 @@ function Transfer() {
   const changeAmountHandler = (e) => {
     setAmount(e.target.value);
   };
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = async (e) => {
+    setSubmitClicked(true);
     e.preventDefault();
     const transferData = {
       receiver: name,
       sender: userDetails.name,
       amtTransfered: parseInt(amount),
     };
-    axios.post(`/transfer/${id}`, transferData);
-    navigate("/customersList");
+    setTimeout(() => {
+      navigate("/customersList");
+    }, 1000);
+    await axios.post(`/transfer/${id}`, transferData);
   };
   return (
-    <div className="container d-flex col-12 mt-3">
-      <form onSubmit={onSubmitHandler}>
-        <p>Id: {userDetails.accId}</p>
-        <p>Email: {userDetails.email}</p>
-        <p>Name: {userDetails.name}</p>
-        <p>Balance: {userDetails.currentBalance}</p>
-        <div className="">
-          <Autocomplete
-            disablePortal
-            options={allUsers}
-            renderInput={(params) => <TextField {...params} label="Customer" />}
-            onChange={userSelectHandler}
-          />
-          <TextField
-            type="number"
-            id="standard-basic"
-            label="Amount"
-            variant="standard"
-            onChange={changeAmountHandler}
-          />
+    <>
+      <div className="container d-flex mt-3">
+        <form onSubmit={onSubmitHandler}>
+          <p>Id: {userDetails.accId}</p>
+          <p>Email: {userDetails.email}</p>
+          <p>Name: {userDetails.name}</p>
+          <p>Balance: {userDetails.currentBalance}</p>
+          <div className="">
+            <Autocomplete
+              disablePortal
+              options={allUsers}
+              renderInput={(params) => (
+                <TextField {...params} label="Customer" />
+              )}
+              onChange={userSelectHandler}
+            />
+            <TextField
+              type="number"
+              id="standard-basic"
+              label="Amount"
+              variant="standard"
+              onChange={changeAmountHandler}
+            />
+          </div>
+          <Button variant="contained" type="submit" className="mt-3">
+            Make Transaction
+          </Button>
+        </form>
+      </div>
+      {submitClicked && (
+        <div class="alert alert-success container mt-3" role="alert">
+          A simple success alert—check it out!
         </div>
-        <Button variant="contained" type="submit" className="mt-3">
-          Make Transaction
-        </Button>
-      </form>
-    </div>
+      )}
+    </>
   );
 }
 
