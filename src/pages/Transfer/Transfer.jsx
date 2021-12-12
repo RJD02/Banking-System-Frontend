@@ -46,7 +46,7 @@ function Transfer() {
       amtTransfered: parseInt(amount),
     };
     setTimeout(() => {
-      navigate("/customersList");
+      navigate("/Banking-System-Frontend/customersList");
     }, 1000);
     await axios.post(`/transfer/${id}`, transferData);
   };
