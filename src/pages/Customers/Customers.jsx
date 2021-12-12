@@ -8,9 +8,7 @@ function Customers() {
   const location = useLocation();
   useEffect(() => {
     const getAllUsers = async () => {
-      let allUsers = await (
-        await axios.get("http://localhost:8000/listAllUsers")
-      ).data;
+      let allUsers = await (await axios.get("/listAllUsers")).data;
       console.log("All users =", allUsers);
       setData(allUsers);
     };

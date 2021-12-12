@@ -14,17 +14,17 @@ function App() {
       <Navbar />
 
       <Routes>
-        <Route path="/Banking-System-Frontend/" element={<HomePage />} />
+        <Route path="/" element={<HomePage />} />
         <Route
-          path="/Banking-System-Frontend/customersList"
+          path="/customersList"
           element={<Customers />}
         />
         <Route
-          path="/Banking-System-Frontend/transfer/:id"
+          path="/transfer/:id"
           element={<Transfer />}
         />
         <Route
-          path="/Banking-System-Frontend/transferHistory"
+          path="/transferHistory"
           element={<TransactionHistory />}
         />
       </Routes>
